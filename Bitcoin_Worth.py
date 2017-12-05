@@ -29,6 +29,13 @@ worth_USD = '${:,.2f}'.format(float(price) * owned)
 margin = worth - invested
 margin_USD = '${:,.2f}'.format(margin)
 
+
+x_values = []
+y_values = []
+
+x_values.append(time)
+y_values.append(price)
+
 def update_label():
     time = datetime.now()
     timestamp = str(time.time().strftime('%I:%M %p'))
@@ -38,7 +45,12 @@ def update_label():
     worth_USD = '${:,.2f}'.format(float(price) * owned)
     margin = worth - invested
     margin_USD = '${:,.2f}'.format(margin)
-
+    x_values.append(time)
+    y_values.append(price)
+    app.updatePlot('p1', x_values, y_values, keepLabels=False)
+    app.refreshPlot('p1')
+    print(x_values)
+    print(y_values)
     app.clearLabel('L1')
     app.setLabel('L1',price_USD)
 
@@ -56,7 +68,7 @@ app = gui('Test1' '480x320')
 app.setGeometry('fullscreen')
 app.setBg('black')
 
-app.setPollTime(30000)
+app.setPollTime(2000)
 app.setFont(64)
 app.addLabel('L1', price_USD, 1,1,3)
 app.addLabel('L2', margin_USD, 2,1,3)
@@ -75,5 +87,8 @@ app.getLabelWidget("L2").config(font="Verdana 44")
 app.getLabelWidget("L3").config(font="Verdana 10")
 app.getLabelWidget("L4").config(font="Verdana 10")
 app.registerEvent(update_label)
+
+plt = app.addPlot("p1", x_values, y_values, 4,1,3)
+
 
 app.go()
