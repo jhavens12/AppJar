@@ -3,6 +3,9 @@ import requests
 from exchanges.coindesk import CoinDesk
 from time import sleep
 from datetime import datetime
+import socket
+
+current_ip = socket.gethostbyname(socket.gethostname())
 
 invested = 122.44
 owned = .01
@@ -48,7 +51,8 @@ app.setPollTime(30000)
 app.setFont(64)
 app.addLabel('L1', price_USD, 1,1,3)
 app.addLabel('L2', margin_USD, 2,1,3)
-app.addLabel('L3', timestamp, 3,1,3)
+app.addLabel('L3', timestamp, 3,1,1)
+app.addLabel('L4', current_ip, 3,3,1)
 app.setLabelFg('L1', 'blue')
 
 if worth > 0:
@@ -57,8 +61,10 @@ else:
     app.setLabelFg('L2', 'red')
 
 app.setLabelFg('L3', 'white')
+app.setLabelFg('L4', 'white')
 app.getLabelWidget("L2").config(font="Verdana 44")
 app.getLabelWidget("L3").config(font="Verdana 10")
+app.getLabelWidget("L4").config(font="Verdana 10")
 app.registerEvent(update_label)
 
 app.go()
