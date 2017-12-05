@@ -42,6 +42,7 @@ def update_label():
 
 app = gui('Test1' '480x320')
 app.setGeometry('fullscreen')
+app.setBg('black')
 
 app.setPollTime(30000)
 app.setFont(64)
@@ -55,9 +56,9 @@ if worth > 0:
 else:
     app.setLabelFg('L2', 'red')
 
-app.setLabelFg('L3', 'black')
+app.setLabelFg('L3', 'white')
 app.getLabelWidget("L2").config(font="Verdana 44")
-app.getLabelWidget("L3").config(font="Courier 20")
+app.getLabelWidget("L3").config(font="Verdana 10")
 app.registerEvent(update_label)
 
 app.go()
