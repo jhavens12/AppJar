@@ -44,7 +44,7 @@ app = gui('Test1' '480x320')
 app.setGeometry('fullscreen')
 
 app.setPollTime(30000)
-app.setFont(68)
+app.setFont(64)
 app.addLabel('L1', price_USD, 1,1,3)
 app.addLabel('L2', margin_USD, 2,1,3)
 app.addLabel('L3', timestamp, 3,1,3)
@@ -55,8 +55,8 @@ if worth > 0:
 else:
     app.setLabelFg('L2', 'red')
 
-app.setLabelFg('L3', 'red')
-app.getLabelWidget("L2").config(font="Verdana 54")
+app.setLabelFg('L3', 'black')
+app.getLabelWidget("L2").config(font="Verdana 44")
 app.getLabelWidget("L3").config(font="Courier 20")
 app.registerEvent(update_label)
 
