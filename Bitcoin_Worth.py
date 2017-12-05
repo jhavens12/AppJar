@@ -4,8 +4,17 @@ from exchanges.coindesk import CoinDesk
 from time import sleep
 from datetime import datetime
 import socket
+import os
+import sys
 
 current_ip = socket.gethostbyname(socket.gethostname())
+
+if current_ip == "127.0.1.1":
+
+    gam_input = "ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
+    result_1 = os.popen(gam_input).read()
+    current_ip = result_1
+
 
 invested = 122.44
 owned = .01
