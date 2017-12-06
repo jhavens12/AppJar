@@ -20,18 +20,29 @@ n = 1
 x_list = []
 y_list = []
 
-time = datetime.now()
-timestamp = str(time.time().strftime('%I:%M %p'))
+# time = datetime.now()
+# timestamp = str(time.time().strftime('%I:%M %p'))
+#
+# price = CoinDesk.get_current_price(currency='USD')
+# price_USD = '${:,.2f}'.format(price)
+# worth = float(price) * owned
+# worth_USD = '${:,.2f}'.format(float(price) * owned)
+# margin = worth - invested
+# margin_USD = '${:,.2f}'.format(margin)
+#
+# x_list.append(time)
+# y_list.append(price)
 
-price = CoinDesk.get_current_price(currency='USD')
-price_USD = '${:,.2f}'.format(price)
-worth = float(price) * owned
-worth_USD = '${:,.2f}'.format(float(price) * owned)
-margin = worth - invested
-margin_USD = '${:,.2f}'.format(margin)
+v = ui.load_view()
+v.background_color = "black"
 
-x_list.append(time)
-y_list.append(price)
+label1= v['label1']
+label2= v['label2']
+label3= v['label3']
+label4= v['label4']
+
+graph(x_list,y_list)
+
 
 
 def graph(x_list,y_list):
@@ -50,56 +61,39 @@ def graph(x_list,y_list):
 
 
 def update_labels():
-    
+
     time = datetime.now()
     timestamp = str(time.time().strftime('%I:%M %p'))
-  
-    
+
+
     price = CoinDesk.get_current_price(currency='USD')
     price_USD = '${:,.2f}'.format(price)
     worth = float(price) * owned
     worth_USD = '${:,.2f}'.format(float(price) * owned)
     margin = worth - invested
     margin_USD = '${:,.2f}'.format(margin)
-    
+
     if margin > 0:
         label2.text_color = 'green'
     else:
         label2.text_color = 'red'
-    
+
     x_list.append(time)
     y_list.append(price)
-    
+
     label1.text = price_USD
     label2.text = margin_USD
     label3.text = timestamp
-    
+
     graph(x_list,y_list)
 
 
-v = ui.load_view()
-v.background_color = "black"
+update_labels()
 
-label1= v['label1']
-label1.text = price_USD
-
-label2= v['label2']
-label2.text = margin_USD
-
-label3= v['label3']
-label3.text = timestamp
-
-label4= v['label4']
-label4.text = str(n)
-
-graph(x_list,y_list)
 v.present(style='sheet', hide_title_bar=True)
-
 
 while True:
   update_labels()
   n = n+1
   label4.text = str(n)
   sleep(5)
-  
-
