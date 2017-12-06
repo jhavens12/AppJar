@@ -41,10 +41,6 @@ label2= v['label2']
 label3= v['label3']
 label4= v['label4']
 
-graph(x_list,y_list)
-
-
-
 def graph(x_list,y_list):
     plt.clf()
 
@@ -87,7 +83,7 @@ def update_labels():
 
     graph(x_list,y_list)
 
-
+graph(x_list,y_list)
 update_labels()
 
 v.present(style='sheet', hide_title_bar=True)
