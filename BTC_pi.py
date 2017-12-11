@@ -36,7 +36,7 @@ margin_USD = '${:,.2f}'.format(margin)
 def update_label():
     time = datetime.now()
     timestamp = str(time.time().strftime('%I:%M %p'))
-    price = CoinDesk.get_current_price(currency='USD')
+    price = float(public_client.get_product_ticker(product_id='BTC-USD')['price'])
     price_USD = '${:,.2f}'.format(price)
     worth = float(price) * owned
     worth_USD = '${:,.2f}'.format(float(price) * owned)
