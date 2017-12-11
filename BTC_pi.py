@@ -1,11 +1,12 @@
 from appJar import gui
 import requests
-from exchanges.coindesk import CoinDesk
+#from exchanges.coindesk import CoinDesk
 from time import sleep
 from datetime import datetime
 import socket
 import os
 import sys
+import gdax
 
 current_ip = socket.gethostbyname(socket.gethostname())
 
@@ -22,7 +23,10 @@ owned = .01
 time = datetime.now()
 timestamp = str(time.time().strftime('%I:%M %p'))
 
-price = CoinDesk.get_current_price(currency='USD')
+public_client = gdax.PublicClient()
+price = float(public_client.get_product_ticker(product_id='BTC-USD')['price'])
+
+#price = CoinDesk.get_current_price(currency='USD')
 price_USD = '${:,.2f}'.format(price)
 worth = float(price) * owned
 worth_USD = '${:,.2f}'.format(float(price) * owned)
